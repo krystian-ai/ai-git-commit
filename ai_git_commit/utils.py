@@ -1,3 +1,4 @@
+import sys
 import subprocess
 
 def get_git_diff():
@@ -6,7 +7,11 @@ def get_git_diff():
 
     :return: A string containing the Git diff.
     """
-    result = subprocess.run(["git", "diff"], capture_output=True, text=True)
+    if sys.platform == "win32":
+        # On Windows, use shell=True for subprocess.run()
+        result = subprocess.run(["git", "diff"], capture_output=True, text=True, shell=True)
+    else:
+        result = subprocess.run(["git", "diff"], capture_output=True, text=True)
     return result.stdout
 
 def get_user_input(prompt):

@@ -1,4 +1,5 @@
 import os
+import sys
 import subprocess
 from openai_api import generate_commit_message
 from utils import get_git_diff, get_user_input, get_user_confirmation
@@ -25,7 +26,14 @@ def main():
             commit_message = get_user_input("Edit the commit message: ")
             break
 
-    subprocess.run(["git", "commit", "-m", commit_message])
+    git_command = ["git", "commit", "-m", commit_message]
+
+    if sys.platform == "win32":
+        # On Windows, use shell=True for subprocess.run()
+        subprocess.run(git_command, shell=True, text=True)
+    else:
+        subprocess.run(git_command, text=True)
+
     print(f"Commit successful with message: {commit_message}")
 
 if __name__ == "__main__":
