@@ -9,9 +9,9 @@ def get_git_diff():
     """
     if sys.platform == "win32":
         # On Windows, use shell=True for subprocess.run()
-        result = subprocess.run(["git", "diff"], capture_output=True, text=True, shell=True)
+        result = subprocess.run(["git", "diff","--cached"], capture_output=True, text=True, shell=True)
     else:
-        result = subprocess.run(["git", "diff"], capture_output=True, text=True)
+        result = subprocess.run(["git", "diff","--cached"], capture_output=True, text=True)
     return result.stdout
 
 def get_user_input(prompt):
