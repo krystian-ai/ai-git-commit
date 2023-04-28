@@ -19,7 +19,7 @@ def generate_text(prompt, max_tokens=50, temperature=0.7, n=1):
     :return: A list of generated text completions.
     """
     response = openai.Completion.create(
-        engine="text-davinci-002",
+        engine="text-davinci-003",
         prompt=prompt,
         max_tokens=max_tokens,
         n=n,
